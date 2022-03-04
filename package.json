@@ -19,6 +19,8 @@
   "homepage": "https://github.com/harshakoneru98/Event-Book-App#readme",
   "dependencies": {
     "apollo-server": "^3.6.3",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.0",
     "graphql": "^16.3.0",
     "mongoose": "^6.2.4",
     "nodemon": "^2.0.15"

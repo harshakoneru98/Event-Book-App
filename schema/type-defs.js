@@ -16,12 +16,24 @@ const typeDefs = gql`
         date: String!
     }
 
+    type User {
+        _id: ID!
+        email: String!
+        password: String
+    }
+
+    input UserInput {
+        email: String!
+        password: String!
+    }
+
     type Query {
         events: [Event!]!
     }
 
     type Mutation {
         createEvent(eventInput: EventInput): Event
+        createUser(userInput: UserInput): User
     }
 `;
 

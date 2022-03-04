@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
-const Event = require('../models/event');
-const User = require('../models/user');
+const Event = require('../../models/event');
+const User = require('../../models/user');
 
 const events = async (eventIds) => {
     try {

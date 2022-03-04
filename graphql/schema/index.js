@@ -29,13 +29,24 @@ const typeDefs = gql`
         password: String!
     }
 
+    type Booking {
+        _id: ID!
+        event: Event!
+        user: User!
+        createdAt: String!
+        updatedAt: String!
+    }
+
     type Query {
         events: [Event!]!
+        bookings: [Booking!]!
     }
 
     type Mutation {
         createEvent(eventInput: EventInput): Event
         createUser(userInput: UserInput): User
+        bookEvent(eventId: ID!): Booking!
+        cancelBooking(bookingId: ID!): Event!
     }
 `;
 

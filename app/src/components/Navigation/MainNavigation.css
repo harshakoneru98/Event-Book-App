@@ -40,3 +40,7 @@
   .main-navigation__items a.active {
       color: #f8e264;
   }
+
+  .logout-link{
+    cursor: pointer;
+  }

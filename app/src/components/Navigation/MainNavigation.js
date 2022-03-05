@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
 import './MainNavigation.css';
 
 function MainNavigation() {
+    const navigate = useNavigate();
     let contextType = useContext(AuthContext);
     return (
         <AuthContext.Consumer>
@@ -30,6 +31,20 @@ function MainNavigation() {
                                         <NavLink to="/bookings">
                                             Bookings
                                         </NavLink>
+                                    </li>
+                                )}
+                                {contextType?.token && (
+                                    <li>
+                                        <a
+                                            className="logout-link"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                contextType.logout();
+                                                navigate('/');
+                                            }}
+                                        >
+                                            Logout
+                                        </a>
                                     </li>
                                 )}
                             </ul>

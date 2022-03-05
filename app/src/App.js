@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Navigate, Routes } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import AuthContext from './context/auth-context';
@@ -20,12 +20,25 @@ function App() {
     let login = (token, userId, tokenExpiration) => {
         setToken(token);
         setUserId(userId);
+        localStorage.setItem('token', token);
+        localStorage.setItem('userId', userId);
     };
 
     let logout = () => {
         setToken(null);
         setUserId(null);
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
     };
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            setToken(localStorage.getItem('token'));
+        }
+        if (localStorage.getItem('userId')) {
+            setUserId(localStorage.getItem('userId'));
+        }
+    }, [localStorage]);
 
     return (
         <ApolloProvider client={client}>

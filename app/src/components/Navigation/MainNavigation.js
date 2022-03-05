@@ -34,7 +34,11 @@ function MainNavigation() {
                                             </NavLink>
                                         </li>
                                         <li>
-                                            <button>Logout</button>
+                                            <button
+                                                onClick={contextType.logout}
+                                            >
+                                                Logout
+                                            </button>
                                         </li>
                                     </React.Fragment>
                                 )}

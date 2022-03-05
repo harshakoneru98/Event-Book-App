@@ -55,38 +55,43 @@ function App() {
                         <MainNavigation />
                         <main className="main-content">
                             <Routes>
-                                {!token && (
-                                    <Route
-                                        path="/"
-                                        element={<Navigate to="/auth" />}
-                                    />
-                                )}
                                 {token && (
                                     <Route
+                                        exact
                                         path="/"
                                         element={<Navigate to="/events" />}
                                     />
                                 )}
                                 {token && (
                                     <Route
+                                        exact
                                         path="/auth"
                                         element={<Navigate to="/events" />}
                                     />
                                 )}
                                 {!token && (
                                     <Route
+                                        exact
                                         path="/auth"
                                         element={<AuthPage />}
                                     />
                                 )}
                                 <Route
+                                    exact
                                     path="/events"
                                     element={<EventsPage />}
                                 />
                                 {token && (
                                     <Route
+                                        exact
                                         path="/bookings"
                                         element={<BookingsPage />}
+                                    />
+                                )}
+                                {!token && (
+                                    <Route
+                                        path="/*"
+                                        element={<Navigate to="/auth" />}
                                     />
                                 )}
                             </Routes>

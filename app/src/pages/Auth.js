@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, gql, useLazyQuery, useMutation } from '@apollo/client';
+import './Auth.css';
 
 const QUERY_LOGIN = gql`
     query tokenGeneration($email: String!, $password: String!) {

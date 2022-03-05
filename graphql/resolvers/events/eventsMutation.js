@@ -12,13 +12,13 @@ module.exports = {
             description: args.eventInput.description,
             price: +args.eventInput.price,
             date: new Date(args.eventInput.date),
-            creator: '6221c8c649ee287c90353f78'
+            creator: context.userId
         });
         let createdEvent;
         try {
             const result = await event.save();
             createdEvent = transformEvent(result);
-            const creator = await User.findById('6221c8c649ee287c90353f78');
+            const creator = await User.findById(context.userId);
 
             if (!creator) {
                 throw new Error('User not found.');

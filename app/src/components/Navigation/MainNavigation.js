@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
 import './MainNavigation.css';
 
 function MainNavigation() {
-    const navigate = useNavigate();
     let contextType = useContext(AuthContext);
     return (
         <AuthContext.Consumer>
@@ -42,20 +41,6 @@ function MainNavigation() {
                                         </li>
                                     </React.Fragment>
                                 )}
-                                {/* {contextType?.token && (
-                                    <li>
-                                        <a
-                                            className="logout-link"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                contextType.logout();
-                                                navigate('/');
-                                            }}
-                                        >
-                                            Logout
-                                        </a>
-                                    </li>
-                                )} */}
                             </ul>
                         </nav>
                     </header>

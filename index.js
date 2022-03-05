@@ -22,7 +22,7 @@ const server = new ApolloServer({
         }
         let decodedToken;
         try {
-            decodedToken = jwt.verify(token, 'somesupersecretkey');
+            decodedToken = jwt.verify(token, process.env.AUTH_KEY);
         } catch (err) {
             isAuth = false;
             return { isAuth };

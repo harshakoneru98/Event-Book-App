@@ -27,13 +27,18 @@ function MainNavigation() {
                                     <NavLink to="/events">Events</NavLink>
                                 </li>
                                 {contextType?.token && (
-                                    <li>
-                                        <NavLink to="/bookings">
-                                            Bookings
-                                        </NavLink>
-                                    </li>
+                                    <React.Fragment>
+                                        <li>
+                                            <NavLink to="/bookings">
+                                                Bookings
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <button>Logout</button>
+                                        </li>
+                                    </React.Fragment>
                                 )}
-                                {contextType?.token && (
+                                {/* {contextType?.token && (
                                     <li>
                                         <a
                                             className="logout-link"
@@ -46,7 +51,7 @@ function MainNavigation() {
                                             Logout
                                         </a>
                                     </li>
-                                )}
+                                )} */}
                             </ul>
                         </nav>
                     </header>

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useQuery, gql, useLazyQuery, useMutation } from '@apollo/client';
+import React, { useState, useContext } from 'react';
+import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import './Auth.css';
+import AuthContext from '../context/auth-context';
 
 const QUERY_LOGIN = gql`
     query tokenGeneration($email: String!, $password: String!) {
@@ -26,8 +27,12 @@ function AuthPage() {
     const [isPassword, setIsPassword] = useState('');
     const [isLogin, setIsLogin] = useState(true);
 
-    const [fetchLogin, { data: loginData, error: loginError }] =
-        useLazyQuery(QUERY_LOGIN);
+    let contextType = useContext(AuthContext);
+
+    const [
+        fetchLogin,
+        { data: loginData, loading: loginLoading, error: loginError }
+    ] = useLazyQuery(QUERY_LOGIN);
 
     const [createUser] = useMutation(CREATE_USER_MUTATION);
 
@@ -44,6 +49,14 @@ function AuthPage() {
                 variables: {
                     email: isEmail,
                     password: isPassword
+                }
+            }).then((resData) => {
+                if (resData?.data?.login?.token) {
+                    contextType.login(
+                        resData.data.login.token,
+                        resData.data.login.userId,
+                        resData.data.login.tokenExpiration
+                    );
                 }
             });
         } else {
@@ -80,6 +93,7 @@ function AuthPage() {
                 submitHandler();
             }}
         >
+            {loginLoading && <p>Checking Login Details...</p>}
             <div className="form-control">
                 <label htmlFor="email">E-Mail</label>
                 <input

@@ -1,11 +1,41 @@
 require('dotenv').config();
 
 const { ApolloServer } = require('apollo-server');
+const mongoose = require('mongoose');
 const { typeDefs } = require('./graphql/schema/index');
 const { resolvers } = require('./graphql/resolvers/index');
-const mongoose = require('mongoose');
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: ({ req }) => {
+        let isAuth;
+        const authHeader = req.get('Authorization');
+        if (!authHeader) {
+            isAuth = false;
+            return { isAuth };
+        }
+        const token = authHeader.split(' ')[1];
+        if (!token || token === '') {
+            isAuth = false;
+            return { isAuth };
+        }
+        let decodedToken;
+        try {
+            decodedToken = jwt.verify(token, 'somesupersecretkey');
+        } catch (err) {
+            isAuth = false;
+            return { isAuth };
+        }
+        if (!decodedToken) {
+            isAuth = false;
+            return { isAuth };
+        }
+        isAuth = true;
+        let userId = decodedToken.userId;
+        return { isAuth, userId };
+    }
+});
 
 mongoose
     .connect(

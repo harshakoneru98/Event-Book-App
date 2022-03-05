@@ -1,3 +1,4 @@
+const authQuery = require('./auth/authQuery');
 const eventsQuery = require('./events/eventsQuery');
 const bookingsQuery = require('./bookings/bookingsQuery');
 const authMutation = require('./auth/authMutation');
@@ -6,6 +7,7 @@ const bookingsMutation = require('./bookings/bookingsMutation');
 
 const resolvers = {
     Query: {
+        ...authQuery,
         ...eventsQuery,
         ...bookingsQuery
     },

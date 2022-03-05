@@ -2,7 +2,10 @@ const Booking = require('../../../models/booking');
 const { transformBooking } = require('../merge');
 
 module.exports = {
-    bookings: async () => {
+    bookings: async (parent, args, context) => {
+        if (!context.isAuth) {
+            throw new Error('Unauthenticated!');
+        }
         try {
             const bookings = await Booking.find();
             return bookings.map((booking) => {

@@ -3,7 +3,10 @@ const User = require('../../../models/user');
 const { transformEvent } = require('../merge');
 
 module.exports = {
-    createEvent: async (parent, args) => {
+    createEvent: async (parent, args, context) => {
+        if (!context.isAuth) {
+            throw new Error('Unauthenticated!');
+        }
         const event = new Event({
             title: args.eventInput.title,
             description: args.eventInput.description,

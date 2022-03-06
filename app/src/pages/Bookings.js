@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
-import { gql, useQuery } from '@apollo/client';
+import React, { useEffect, useContext } from 'react';
+import { gql, useQuery, useMutation } from '@apollo/client';
 import Spinner from '../components/Spinner/Spinner';
+import BookingList from '../components/Bookings/BookingList/BookingList';
 import AuthContext from '../context/auth-context';
 
 const QUERY_ALL_BOOKINGS = gql`
@@ -17,6 +18,15 @@ const QUERY_ALL_BOOKINGS = gql`
     }
 `;
 
+const DELETE_BOOKING_MUTATION = gql`
+    mutation ($bookingId: ID!) {
+        cancelBooking(bookingId: $bookingId) {
+            _id
+            title
+        }
+    }
+`;
+
 function BookingsPage() {
     let contextType = useContext(AuthContext);
     const {
@@ -25,6 +35,26 @@ function BookingsPage() {
         error: bookingsError,
         refetch
     } = useQuery(QUERY_ALL_BOOKINGS);
+
+    const [deleteBooking] = useMutation(DELETE_BOOKING_MUTATION);
+
+    useEffect(() => {
+        refetch();
+    }, []);
+
+    let deleteBookingHandler = (bookingId) => {
+        deleteBooking({
+            variables: {
+                bookingId: bookingId
+            }
+        })
+            .then((data) => {
+                refetch();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     // Error Console
     if (bookingsError) {
@@ -36,14 +66,10 @@ function BookingsPage() {
             {bookingsLoading ? (
                 <Spinner />
             ) : (
-                <ul>
-                    {bookingsData?.bookings?.map((booking) => (
-                        <li key={booking._id}>
-                            {booking.event.title} -{' '}
-                            {new Date(booking.createdAt).toLocaleDateString()}
-                        </li>
-                    ))}
-                </ul>
+                <BookingList
+                    bookings={bookingsData?.bookings}
+                    onDelete={deleteBookingHandler}
+                />
             )}
         </React.Fragment>
     );

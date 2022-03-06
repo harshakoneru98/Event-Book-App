@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import Backdrop from '../components/Backdrop/Backdrop';
 import Modal from '../components/Modal/Modal';
@@ -70,6 +70,10 @@ function EventsPage() {
     } = useQuery(QUERY_ALL_EVENTS);
     const [createEvent] = useMutation(CREATE_EVENT_MUTATION);
     const [createBooking] = useMutation(CREATE_BOOKING_MUTATION);
+
+    useEffect(() => {
+        refetch();
+    }, []);
 
     let startCreateEventHandler = () => {
         setCreating(true);

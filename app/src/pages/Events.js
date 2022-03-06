@@ -39,6 +39,16 @@ const CREATE_EVENT_MUTATION = gql`
     }
 `;
 
+const CREATE_BOOKING_MUTATION = gql`
+    mutation ($eventId: ID!) {
+        bookEvent(eventId: $eventId) {
+            _id
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
 function EventsPage() {
     const [creating, setCreating] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -51,6 +61,7 @@ function EventsPage() {
 
     let contextType = useContext(AuthContext);
 
+    // Queries and Mutations
     const {
         data: eventsData,
         loading: eventsLoading,
@@ -58,6 +69,7 @@ function EventsPage() {
         refetch
     } = useQuery(QUERY_ALL_EVENTS);
     const [createEvent] = useMutation(CREATE_EVENT_MUTATION);
+    const [createBooking] = useMutation(CREATE_BOOKING_MUTATION);
 
     let startCreateEventHandler = () => {
         setCreating(true);
@@ -106,7 +118,24 @@ function EventsPage() {
         setSelectedEvent(clickEvent[0]);
     };
 
-    let bookEventHandler = () => {};
+    let bookEventHandler = () => {
+        if (!contextType.token) {
+            setSelectedEvent(null);
+        } else {
+            createBooking({
+                variables: {
+                    eventId: selectedEvent._id
+                }
+            })
+                .then((data) => {
+                    console.log(data);
+                    setSelectedEvent(null);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    };
 
     // Error Console
     if (eventsError) {
@@ -180,7 +209,7 @@ function EventsPage() {
                     canConfirm
                     onCancel={modalCancelHandler}
                     onConfirm={bookEventHandler}
-                    confirmText="Book"
+                    confirmText={contextType.token ? 'Book' : 'Confirm'}
                 >
                     <h1>{selectedEvent?.title}</h1>
                     <h2>

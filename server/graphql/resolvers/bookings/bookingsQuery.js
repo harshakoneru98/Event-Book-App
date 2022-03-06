@@ -7,7 +7,7 @@ module.exports = {
             throw new Error('Unauthenticated!');
         }
         try {
-            const bookings = await Booking.find();
+            const bookings = await Booking.find({ user: context.userId });
             return bookings.map((booking) => {
                 return transformBooking(booking);
             });

@@ -132,7 +132,6 @@ function EventsPage() {
                 }
             })
                 .then((data) => {
-                    console.log(data);
                     setSelectedEvent(null);
                 })
                 .catch((err) => {

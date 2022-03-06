@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const { ApolloServer } = require('apollo-server');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const { typeDefs } = require('./graphql/schema/index');
 const { resolvers } = require('./graphql/resolvers/index');
 

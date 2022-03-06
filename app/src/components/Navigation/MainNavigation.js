@@ -11,7 +11,7 @@ function MainNavigation() {
                 return (
                     <header className="main-navigation">
                         <div className="main-navigation__logo">
-                            <h1>Events Empire</h1>
+                            <h1>EmpEvents</h1>
                         </div>
                         <nav className="main-navigation__items">
                             <ul>

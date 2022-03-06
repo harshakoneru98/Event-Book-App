@@ -5,32 +5,32 @@
     position: fixed;
     top: 20vh;
     left: 5%;
-  }
-  
-  .modal__header {
+}
+
+.modal__header {
     padding: 1rem;
     background: #3c5b96;
     color: white;
-  }
-  
-  .modal__header h1 {
+}
+
+.modal__header h1 {
     margin: 0;
     font-size: 1.25rem;
-  }
-  
-  .modal__content {
+}
+
+.modal__content {
     padding: 1rem;
-  }
-  
-  .modal__actions {
+}
+
+.modal__actions {
     display: flex;
     justify-content: flex-end;
     padding: 1rem;
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     .modal {
-      width: 30rem;
-      left: calc((100% - 30rem) / 2);
+        width: 30rem;
+        left: calc((100% - 30rem) / 2);
     }
-  }
+}

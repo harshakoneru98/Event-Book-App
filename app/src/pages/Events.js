@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import Backdrop from '../components/Backdrop/Backdrop';
 import Modal from '../components/Modal/Modal';
+import Spinner from '../components/Spinner/Spinner';
+import EventList from '../components/Events/EventList/EventList';
 import AuthContext from '../context/auth-context';
 import './Events.css';
 
@@ -39,6 +41,7 @@ const CREATE_EVENT_MUTATION = gql`
 
 function EventsPage() {
     const [creating, setCreating] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     // Event Inputs
     const [title, setTitle] = useState('');
@@ -50,6 +53,7 @@ function EventsPage() {
 
     const {
         data: eventsData,
+        loading: eventsLoading,
         error: eventsError,
         refetch
     } = useQuery(QUERY_ALL_EVENTS);
@@ -94,24 +98,24 @@ function EventsPage() {
 
     let modalCancelHandler = () => {
         setCreating(false);
+        setSelectedEvent(null);
     };
+
+    let showDetailHandler = (eventId) => {
+        const clickEvent = eventsData?.events?.filter((e) => e._id === eventId);
+        setSelectedEvent(clickEvent[0]);
+    };
+
+    let bookEventHandler = () => {};
 
     // Error Console
     if (eventsError) {
         console.log(eventsError);
     }
 
-    let eventList = eventsData?.events?.map((event) => {
-        return (
-            <li key={event._id} className="events__list-item">
-                {event.title}
-            </li>
-        );
-    });
-
     return (
         <React.Fragment>
-            {creating && <Backdrop />}
+            {(creating || selectedEvent) && <Backdrop />}
             {creating && (
                 <Modal
                     title="Add Event"
@@ -119,6 +123,7 @@ function EventsPage() {
                     canConfirm
                     onCancel={modalCancelHandler}
                     onConfirm={modalConfirmHandler}
+                    confirmText="Confirm"
                 >
                     <form>
                         <div className="form-control">
@@ -168,6 +173,23 @@ function EventsPage() {
                     </form>
                 </Modal>
             )}
+            {selectedEvent && (
+                <Modal
+                    title={selectedEvent?.title}
+                    canCancel
+                    canConfirm
+                    onCancel={modalCancelHandler}
+                    onConfirm={bookEventHandler}
+                    confirmText="Book"
+                >
+                    <h1>{selectedEvent?.title}</h1>
+                    <h2>
+                        ${selectedEvent?.price} -{' '}
+                        {new Date(selectedEvent?.date).toLocaleDateString()}
+                    </h2>
+                    <p>{selectedEvent?.description}</p>
+                </Modal>
+            )}
             {contextType.token && (
                 <div className="events-control">
                     <p>Share your own Events!</p>
@@ -176,7 +198,15 @@ function EventsPage() {
                     </button>
                 </div>
             )}
-            <ul className="events__list">{eventList}</ul>
+            {eventsLoading ? (
+                <Spinner />
+            ) : (
+                <EventList
+                    events={eventsData?.events}
+                    authUserId={contextType.userId}
+                    onViewDetail={showDetailHandler}
+                />
+            )}
         </React.Fragment>
     );
 }

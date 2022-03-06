@@ -81,10 +81,6 @@ function AuthPage() {
         console.log(loginError);
     }
 
-    if (loginData) {
-        console.log(loginData);
-    }
-
     return (
         <form
             className="auth-form"

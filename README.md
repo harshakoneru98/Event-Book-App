@@ -48,3 +48,19 @@ Open below address in your preferred browser.
 #### c. Selected Event
 <img width="1440" alt="Screen Shot 2022-03-07 at 6 40 06 PM" src="https://user-images.githubusercontent.com/68940693/157155979-fbc79765-e430-4e0c-a673-a58edb617675.png"/>
 
+### 2. Authenticated User who creates Events
+#### a. Created Events
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 40 35 PM" src="https://user-images.githubusercontent.com/68940693/157156448-79d8d8db-6824-45e8-8eff-ed7866de33c5.png"/>
+
+#### b. Create New Event
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 47 17 PM" src="https://user-images.githubusercontent.com/68940693/157156453-08b30ed4-e261-4f71-89d4-d8b200b23661.png"/>
+
+### 3. Authenticated User who books Events
+#### a. All Events
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 40 35 PM" src="https://user-images.githubusercontent.com/68940693/157156656-c444fb7f-f5a1-41d3-b342-de9d5c46aa06.png"/>
+
+#### b. Selects Event to Book
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 41 38 PM" src="https://user-images.githubusercontent.com/68940693/157156661-383e2b5c-9468-43b1-a79a-2efa6dfa832b.png"/>
+
+#### c. All Bookings
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 41 25 PM" src="https://user-images.githubusercontent.com/68940693/157156665-189b2467-2b71-41e9-81d0-54ccc98cc309.png"/>

@@ -37,3 +37,9 @@ Open below address in your preferred browser.
 127.0.0.1:3000
 ```
 
+## Output
+### Users views without Authentication
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 39 39 PM" src="https://user-images.githubusercontent.com/68940693/157155972-b9827db6-df79-4fcd-aeda-ed9dbccf9352.png">
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 39 52 PM" src="https://user-images.githubusercontent.com/68940693/157155977-ee912ebd-50f3-4c89-9501-a27520e34a0b.png">
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 40 06 PM" src="https://user-images.githubusercontent.com/68940693/157155979-fbc79765-e430-4e0c-a673-a58edb617675.png">
+

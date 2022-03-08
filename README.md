@@ -50,7 +50,7 @@ Open below address in your preferred browser.
 
 ### 2. Authenticated User who creates Events
 #### a. Created Events
-<img width="1440" alt="Screen Shot 2022-03-07 at 6 40 35 PM" src="https://user-images.githubusercontent.com/68940693/157156448-79d8d8db-6824-45e8-8eff-ed7866de33c5.png"/>
+<img width="1440" alt="Screen Shot 2022-03-07 at 6 40 55 PM" src="https://user-images.githubusercontent.com/68940693/157156882-04da6350-25b4-493c-9a95-279615bb57be.png"/>
 
 #### b. Create New Event
 <img width="1440" alt="Screen Shot 2022-03-07 at 6 47 17 PM" src="https://user-images.githubusercontent.com/68940693/157156453-08b30ed4-e261-4f71-89d4-d8b200b23661.png"/>
